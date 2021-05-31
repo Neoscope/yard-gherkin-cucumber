@@ -7,13 +7,13 @@
 #
 # @example `~/.yard/config` with LOLCatz step definitions
 #
-#     :"yard-cucumber":
+#     :"yard-gherkin-cucumber":
 #       language:
 #         step_definitions: [ 'WEN', 'I CAN HAZ', 'AN', 'DEN' ]
 #
 # @example `~/.yard/config` with French step definitions
 #
-#     :"yard-cucumber":
+#     :"yard-gherkin-cucumber":
 #       language:
 #         step_definitions: [ 'Soit', 'Etantdonné', 'Lorsque', 'Lorsqu', 'Alors', 'Et' ]
 #
@@ -24,13 +24,13 @@ class YARD::Handlers::Ruby::StepDefinitionHandler < YARD::Handlers::Ruby::Base
   end
 
   def self.custom_step_definitions
-    YARD::Config.options["yard-cucumber"]["language"]["step_definitions"]
+    YARD::Config.options["yard-gherkin-cucumber"]["language"]["step_definitions"]
   end
 
   def self.custom_step_definitions_defined?
-    YARD::Config.options["yard-cucumber"] and
-    YARD::Config.options["yard-cucumber"]["language"] and
-    YARD::Config.options["yard-cucumber"]["language"]["step_definitions"]
+    YARD::Config.options["yard-gherkin-cucumber"] and
+    YARD::Config.options["yard-gherkin-cucumber"]["language"] and
+    YARD::Config.options["yard-gherkin-cucumber"]["language"]["step_definitions"]
   end
 
   def self.step_definitions

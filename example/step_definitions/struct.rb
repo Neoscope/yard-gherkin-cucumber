@@ -1,5 +1,5 @@
 #
-# @see https://github.com/burtlo/yard-cucumber/issues/18
+# @see https://github.com/burtlo/yard-gherkin-cucumber/issues/18
 # 
 CustomerUsageBehavior = Struct.new(:weight, :days, :time, :location, :other_party, :usage_type, :direction, :quantity)
 

@@ -3,21 +3,21 @@ def init
 end
 
 #
-# Append yard-cucumber stylesheet to yard core stylesheets
+# Append yard-gherkin-cucumber stylesheet to yard core stylesheets
 #
 def stylesheets
   super + %w(css/cucumber.css)
 end
 
 #
-# Append yard-cucumber javascript to yard core javascripts
+# Append yard-gherkin-cucumber javascript to yard core javascripts
 #
 def javascripts
   super + %w(js/cucumber.js)
 end
 
 #
-# Append yard-cucumber specific menus 'features' and 'tags'
+# Append yard-gherkin-cucumber specific menus 'features' and 'tags'
 #
 # 'features' and 'tags' are enabled by default.
 #
@@ -26,7 +26,7 @@ end
 #
 # @example `~/.yard.config`
 #
-#     yard-cucumber:
+#     yard-gherkin-cucumber:
 #       menus: [ 'features', 'directories', 'tags', 'step definitions', 'steps' ]
 #
 def menu_lists
@@ -41,8 +41,8 @@ def current_menu_lists
   @current_menu_lists ||= begin
     menus = [ "features", "tags" ]
 
-    if YARD::Config.options["yard-cucumber"] and YARD::Config.options["yard-cucumber"]["menus"]
-      menus = YARD::Config.options["yard-cucumber"]["menus"]
+    if YARD::Config.options["yard-gherkin-cucumber"] and YARD::Config.options["yard-gherkin-cucumber"]["menus"]
+      menus = YARD::Config.options["yard-gherkin-cucumber"]["menus"]
     end
 
     menus
@@ -67,7 +67,7 @@ end
 # @note This method overrides YARD's default layout template's layout method.
 #
 # The existing YARD layout method generates the url for the nav menu on the left
-# side. For YARD-Cucumber objects this will default to the class_list.html.
+# side. For yard-gherkin-cucumber objects this will default to the class_list.html.
 # which is not what we want for features, tags, etc.
 #
 # So we override this method and put in some additional logic to figure out the

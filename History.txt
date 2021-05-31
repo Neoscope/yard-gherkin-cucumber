@@ -1,15 +1,15 @@
 === 4.0.0 / 2018-02-25
 
 * @wellavelino: Adjusts the indentation of several project classes
-  (https://github.com/burtlo/yard-cucumber/pull/89)
+  (https://github.com/burtlo/yard-gherkin-cucumber/pull/89)
 * @elhuang: Adding example tags and scenarios counts
-  (https://github.com/burtlo/yard-cucumber/pull/87)
+  (https://github.com/burtlo/yard-gherkin-cucumber/pull/87)
 * @weh: Update README.md
-  (https://github.com/burtlo/yard-cucumber/pull/84)
+  (https://github.com/burtlo/yard-gherkin-cucumber/pull/84)
 * @weh: Fix Gem Load Error
-  (https://github.com/burtlo/yard-cucumber/pull/83)
+  (https://github.com/burtlo/yard-gherkin-cucumber/pull/83)
 * @Stephen-Kaye: Transforms with CONSTANTS
-  (https://github.com/burtlo/yard-cucumber/pull/79)
+  (https://github.com/burtlo/yard-gherkin-cucumber/pull/79)
 
 === 3.1.0/ 2016-12-06
 
@@ -90,7 +90,7 @@
 === 2.0.2 / 2011-04-06
 
 - No Features/Tags will still generate landing pages instead of no pages
-- Changed link to current gem 'yard-cucumber'
+- Changed link to current gem 'yard-gherkin-cucumber'
 
 === 2.0.1 / 2011-03-14
 
@@ -98,7 +98,7 @@
 
 === 2.0.0 / 2011-02-08
 
-* Cucumber In The YARD becomes `yard-cucumber` and with that gains the
+* Cucumber In The YARD becomes `yard-gherkin-cucumber` and with that gains the
   benefits of being a YARD plugin
 
 === 1.7.9 / 2011-02-05

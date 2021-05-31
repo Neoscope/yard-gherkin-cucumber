@@ -8,9 +8,9 @@ module YARD
         alias_method :yard_setup, :setup
       
         #
-        # To provide the templates necessary for `yard-cucumber` to integrate
+        # To provide the templates necessary for `yard-gherkin-cucumber` to integrate
         # with YARD the adapter has to around-alias the setup method to place
-        # the `yard-cucumber` server templates as the last template in the list.
+        # the `yard-gherkin-cucumber` server templates as the last template in the list.
         #
         # When they are normally loaded with the plugin they cause an error with 
         # the `yardoc` command. They are also not used because the YARD server

@@ -1,8 +1,8 @@
-# YARD-Cucumber: A Requirements Documentation Tool
+# yard-gherkin-cucumber: A Requirements Documentation Tool
 
 ## Synopsis
 
-YARD-Cucumber (formerly Cucumber-In-The-Yard) is a YARD extension that processes
+yard-gherkin-cucumber (formerly Cucumber-In-The-Yard) is a YARD extension that processes
 Cucumber features, scenarios, steps, tags, step definitions, and even transforms
 to provide documentation similar to what you expect to how YARD displays
 classes, methods and constants.This tools bridges the gap of having feature
@@ -17,25 +17,25 @@ an example and see if it would assist your project from a multitude of
 perspectives: as the project's core developer; another developer or a new
 developer; quality assurance engineer; or product owner/stakeholder.
 
-The implemented example has been deployed at [http://burtlo.github.io/yard-cucumber/](http://burtlo.github.io/yard-cucumber/).
+The implemented example has been deployed at [http://burtlo.github.io/yard-gherkin-cucumber/](http://burtlo.github.io/yard-gherkin-cucumber/).
 
-**1. View Features and Scenarios** [example](http://burtlo.github.io/yard-cucumber/requirements.html)
+**1. View Features and Scenarios** [example](http://burtlo.github.io/yard-gherkin-cucumber/requirements.html)
 
-**2. Search through [features, scenarios](http://burtlo.github.io/yard-cucumber/feature_list.html), and [tags](http://burtlo.github.io/yard-cucumber/tag_list.html)**
+**2. Search through [features, scenarios](http://burtlo.github.io/yard-gherkin-cucumber/feature_list.html), and [tags](http://burtlo.github.io/yard-gherkin-cucumber/tag_list.html)**
 
-**3. Dynamic Tag Unions and Intersections** [example](http://burtlo.github.io/yard-cucumber/requirements/tags.html)
+**3. Dynamic Tag Unions and Intersections** [example](http://burtlo.github.io/yard-gherkin-cucumber/requirements/tags.html)
 
-**4. View all features and scenarios by tag** [example](http://burtlo.github.io/yard-cucumber/requirements/tags/bvt.html)
+**4. View all features and scenarios by tag** [example](http://burtlo.github.io/yard-gherkin-cucumber/requirements/tags/bvt.html)
 
-**5. View Step Definitions and Transforms** [example](http://burtlo.github.io/yard-cucumber/requirements/step_transformers.html)
+**5. View Step Definitions and Transforms** [example](http://burtlo.github.io/yard-gherkin-cucumber/requirements/step_transformers.html)
 
-**6. All steps [matched](http://burtlo.github.io/yard-cucumber/requirements/step_transformers.html#definition_5-stepdefinition) to step definitions**
+**6. All steps [matched](http://burtlo.github.io/yard-gherkin-cucumber/requirements/step_transformers.html#definition_5-stepdefinition) to step definitions**
 
-**7. [Steps](http://burtlo.github.io/yard-cucumber/requirements/step_transformers.html#step_transform7-steptransform) that have transforms applied to them**
+**7. [Steps](http://burtlo.github.io/yard-gherkin-cucumber/requirements/step_transformers.html#step_transform7-steptransform) that have transforms applied to them**
 
-**8. [Undefined steps](http://burtlo.github.io/yard-cucumber/requirements/step_transformers.html#undefined_steps) and even [Rubular](http://rubular.com/) links of your step definitions.**
+**8. [Undefined steps](http://burtlo.github.io/yard-gherkin-cucumber/requirements/step_transformers.html#undefined_steps) and even [Rubular](http://rubular.com/) links of your step definitions.**
 
-**9. Feature directories with a README.md will be parsed into the description** [example](http://burtlo.github.io/yard-cucumber/requirements/example/child_feature.html)
+**9. Feature directories with a README.md will be parsed into the description** [example](http://burtlo.github.io/yard-gherkin-cucumber/requirements/example/child_feature.html)
 
 **10. Configurable Menus - want a searchable steps menu and remove the tags menu**
 
@@ -43,16 +43,16 @@ The implemented example has been deployed at [http://burtlo.github.io/yard-cucum
 
 ## Installation
 
-YARD-Cucumber requires the following gems installed:
+yard-gherkin-cucumber requires the following gems installed:
 
 Gherkin 2.2.9 - http://cukes.info
 Cucumber 0.7.5 - http://cukes.info
 YARD 0.8.1 - http://yardoc.org
 
-To install `yard-cucumber` use the following command:
+To install `yard-gherkin-cucumber` use the following command:
 
 ```bash
-$ gem install yard-cucumber
+$ gem install yard-gherkin-cucumber
 ```
 
 (Add `sudo` if you're installing under a POSIX system as root)
@@ -60,7 +60,7 @@ $ gem install yard-cucumber
 ## Usage
 
 YARD supports for automatically including gems with the prefix `yard-`
-as a plugin. To enable automatic loading yard-cucumber.
+as a plugin. To enable automatic loading yard-gherkin-cucumber.
 
 ```bash
 $ mkdir ~/.yard
@@ -98,7 +98,7 @@ elements:
   :ignored_plugins: []
   :autoload_plugins: []
   :safe_mode: false
-  :"yard-cucumber":
+  :"yard-gherkin-cucumber":
     menus: [ 'features', 'directories', 'tags', 'steps', 'step definitions' ]
 ivars:
   :@symbolize_value: false
@@ -106,7 +106,7 @@ ivars:
 
 By default the configuration, yaml format, that is generate by the `yard config`
 command will save a `SymbolHash`. You can still edit this file add the entry for
-`:"yard-cucumber":` and the sub-entry `menus:` which can contain all of the above
+`:"yard-gherkin-cucumber":` and the sub-entry `menus:` which can contain all of the above
 mentioned menus or simply an empty array `[]` if you want no additional menus.
 
 * Step definitions in your language (Ruby 1.9.2)
@@ -115,7 +115,7 @@ Again the yard configuration file you can define additional step definitions
 that can be matched.
 
 ```yaml
-:"yard-cucumber":
+:"yard-gherkin-cucumber":
   language:
     step_definitions: [ 'Given', 'When', 'Then', 'And', 'Soit', 'Etantdonné', 'Lorsque', 'Lorsqu', 'Alors', 'Et' ]
 ```
@@ -131,7 +131,7 @@ You can exclude any feature or scenario from the yardoc by adding a predefined t
 To define tags that will be excluded, again in yard configuration file:
 
 ```yaml
-:"yard-cucumber":
+:"yard-gherkin-cucumber":
   exclude_tags: [ 'exclude-yardoc', 'also-exclude-yardoc' ]
 ```
 

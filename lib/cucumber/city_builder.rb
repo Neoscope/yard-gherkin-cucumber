@@ -15,10 +15,12 @@ module Cucumber
       # @param [String] file the name of the file which the content belongs
       #
       def initialize(file)
-        super()
+        super(file)
+
         @namespace = YARD::CodeObjects::Cucumber::CUCUMBER_NAMESPACE
         find_or_create_namespace(file)
         @file = file
+
       end
 
       # Return the feature that has been defined. This method is the final
@@ -402,8 +404,8 @@ module Cucumber
       end
 
       def has_exclude_tags?(tags)
-        if YARD::Config.options["yard-cucumber"] and YARD::Config.options["yard-cucumber"]["exclude_tags"]
-          return true unless (YARD::Config.options["yard-cucumber"]["exclude_tags"] & tags).empty?
+        if YARD::Config.options["yard-gherkin-cucumber"] and YARD::Config.options["yard-gherkin-cucumber"]["exclude_tags"]
+          return true unless (YARD::Config.options["yard-gherkin-cucumber"]["exclude_tags"] & tags).empty?
         end
       end
 
