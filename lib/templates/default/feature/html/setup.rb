@@ -3,7 +3,9 @@ def init
   @feature = object
     
   sections.push :feature
-  
+
+  sections.push :rules if object.rules
+
   sections.push :scenarios if object.scenarios
     
 end
@@ -12,6 +14,18 @@ def background
   @scenario = @feature.background
   @id = "background"
   erb(:scenario)  
+end
+
+def rules
+  rules = ""
+
+  @feature.rules.each_with_index do |rule,index|
+    @rule = rule
+    @id = "rule_#{index}"
+    rules += erb(:rule)
+  end
+
+  rules
 end
 
 def scenarios

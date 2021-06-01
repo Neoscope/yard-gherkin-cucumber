@@ -2,11 +2,12 @@
 .summary * { padding: 5px 0px 5px 10px; }
 .feature {}
 .tags { font-family: monospace;	font-size: 14px; }
-.title { padding: 10px; font-size: 24px; }
+.title { padding: 10px; font-size: 24px; overflow-wrap: normal }
 
 .control { float: right; font-size: 13px; color: #05A; vertical-align: bottom;  font-family: monospace;	font-size: 14px; cursor: pointer; }
 
 .title { margin: 20px 20px 10px 20px; padding-left: 0px; border-bottom: 1px solid #E3E3E3; }
+.rule { height: 30px; font-size: 14px;}
 .scenario .title { height: 20px; }
 .noborder { border: none; }
 #header * .title { padding: 10px; margin: 0px; border: none; }
@@ -16,7 +17,7 @@
 .title .name { font-weight: bold; color: #3F3F3F; }
 
 .meta { margin-left: 30px; color: gray; }
-.scenario .meta .tags { margin-left: 0px; }
+.rule .scenario .meta .tags { margin-left: 0px; }
 .feature .meta .tags { float: right; margin-right: 20px; }
 
 .suggestion { color: #ff686e; }
@@ -45,10 +46,10 @@
 
 #directory { margin-top: 20px; margin-left: 20px; }
 
-.scenario { margin-top: 40px; margin-left: 20px; }
+.rule .scenario { margin-top: 40px; margin-left: 20px; }
 .requirements * .scenario { margin-top: 0px; margin-left: 0px; }
 
-.scenario .title, .transformer .title {
+.rule .scenario .title, .transformer .title {
     font-size: 1.1em; font-weight: normal; font-family: Monaco, Consolas, Courier, monospace;
     padding: 6px 10px; margin-top: 18px;
     background: #e5e8ff; border: 1px solid #d8d8e5; -moz-border-radius: 3px; -webkit-border-radius: 3px;
@@ -62,17 +63,17 @@
 
 
 
-.scenario .title { border: none; }
+.rule .scenario .title { border: none; }
 .background .title { background: #cbddeb; }
 
 #directory .title, #features .title, #scenarios .title { padding-left: 0px; margin-left: 10px; border-bottom: 1px solid #E3E3E3; }
 #directory .title .name, #features .title .name, #scenarios .title .name { font-weight: normal; }
 
-.scenario .title .pre {	color: #00AAD2; }
+.rule .scenario .title .pre {	color: #00AAD2; }
 .background .title .pre { color: #346F97; }
 
 .requirements .tags, .requirements .steptransformers { margin-left: 50px; margin-right: 30px; }
-.scenario .tags { float: right; margin-right: 20px; margin-top: 5px; }
+.rule .scenario .tags { float: right; margin-right: 20px; margin-top: 5px; }
 
 
 * ul.alpha { font-size: 1.1em; }
@@ -94,7 +95,7 @@
 }
 .steps .none { color: #5D5C5B; }
 
-.scenario .description {
+.rule .scenario .description {
     padding: 10px;
     color: #444444;
     margin-right: 20px;
@@ -102,7 +103,8 @@
 }
 
 .comments { margin-left: 25px; color: gray; padding: 5px; font-size: 13px; }
-.scenario .steps .comments { margin-left: 0px; }
+.scenarios { margin-left: 25px; }
+.rule .scenario .steps .comments { margin-left: 0px; }
 .feature .comments { margin-left: 30px; padding: 10px 20px 20px 10px; }
 
 .step .predicate { color: #5D5C5B; }
@@ -160,9 +162,9 @@ div.undefined { padding: 6px; }
 
 /* Overrides for scenarios in the tag view */
 .tag .feature { margin-left: 20px; }
-.tag .scenario { margin-top: 0px;  margin-left: 20px; padding-left: 30px;	}
-.tag .scenario .title { border-bottom: none; }
-.tag .scenario .meta { margin-top: 0px; }
+.rule .tag .scenario { margin-top: 0px;  margin-left: 20px; padding-left: 30px;	}
+.rule .tag .scenario .title { border-bottom: none; }
+.rule .tag .scenario .meta { margin-top: 0px; }
 
 
 /* Step Transformer Page */

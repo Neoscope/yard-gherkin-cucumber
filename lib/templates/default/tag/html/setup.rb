@@ -13,6 +13,9 @@ def scenarios
   @tag.scenarios
 end
 
+def rules
+  @tag.rules
+end
 
 def alpha_table(objects)
   @elements = Hash.new

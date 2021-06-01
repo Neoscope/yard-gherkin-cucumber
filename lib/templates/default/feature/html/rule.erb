@@ -1,0 +1,57 @@
+<div class="scenario rule<%= @id %>">
+  <a name="<%= @id %>" />
+  <div class="title">
+    <div style="float: left;">
+      <a class="toggle"> - </a>
+      <span class="pre"><%= @rule.keyword %>:</span>
+      <span class="name"><%= h @rule.value %></span>
+    </div>
+    <!--<a class="link" style="float:right; clear:right;" href="<%= url_for(@rule.feature, @id) %>">link</a>-->
+  </div>
+
+  <% if @rule.description.length > 0 %>
+  <div class="description">
+    <%= htmlify_with_newlines @rule.description %>
+  </div>
+  <% end %>
+
+  <% if @rule.comments.length > 0 %>
+  <div class="comments developer">
+    <%= htmlify_with_newlines @rule.comments %>
+  </div>
+  <% end %>
+
+  <div class="details">
+    <div class="meta developer">
+      <div class="file"><%= @rule.location %></div>
+      <% unless @rule.tags.empty? %>
+        <div style="clear:right;"></div>
+        <div class="tags">
+          <% @rule.tags.each do |tag| %>
+            <a href="<%= url_for tag %>"><%= tag.value %></a>
+          <% end %>
+        </div>
+      <% end%>
+      <div style="clear: both;"></div>
+    </div>
+
+    <div class="scenarios">
+      <% if @rule.scenarios.empty?  %>
+
+      <% else %>
+         <% @rule.scenarios.each do |scenario| %>
+
+            <%=@scenario = scenario;  erb(:scenario) %>
+          <% end %>
+
+      <% end %>
+    </div>
+
+
+  </div>
+  
+  <div class="attributes" style="display:none;">
+    <input type="hidden" name="collapsed" value="false">
+  </div>
+
+</div>

@@ -15,7 +15,7 @@ module Cucumber
       # @param [String] file the name of the file which the content belongs
       #
       def initialize(file)
-        super(file)
+        super(Cucumber::Messages::IdGenerator::UUID.new)
 
         @namespace = YARD::CodeObjects::Cucumber::CUCUMBER_NAMESPACE
         find_or_create_namespace(file)
@@ -76,7 +76,7 @@ module Cucumber
       def find_or_create_tag(tag_name,parent)
         #log.debug "Processing tag #{tag_name}"
         tag_code_object = YARD::Registry.all(:tag).find {|tag| tag.value == tag_name } ||
-          YARD::CodeObjects::Cucumber::Tag.new(YARD::CodeObjects::Cucumber::CUCUMBER_TAG_NAMESPACE,tag_name.gsub('@','')) {|t| t.owners = [] ; t.value = tag_name ; t.total_scenarios = 0}
+          YARD::CodeObjects::Cucumber::Tag.new(YARD::CodeObjects::Cucumber::CUCUMBER_TAG_NAMESPACE,tag_name.gsub('@','')) {|t| t.owners = [] ; t.value = tag_name ; t.total_scenarios = 0; t.total_rules = 0}
 
         tag_code_object.add_file(@file,parent.line)
 
@@ -108,17 +108,25 @@ module Cucumber
 
         background(feature[:background]) if feature[:background]
 
-        feature[:children].each do |child|
-          case child[:type]
-            when :Background
-              background(child)
-            when :ScenarioOutline
-              outline = scenario_outline(child)
-              @feature.total_scenarios += outline.scenarios.size
-            when :Scenario
-              scenario(child)
-          end
-        end
+        rule(feature[:rule]) if feature[:rule]
+
+        feature[:children].each { |child|
+          child.each {|key, value|
+            case key
+              when :background
+                background(value)
+              when :rule
+                rule(value)
+              when :scenarioOutline
+                outline = scenario_outline(value)
+                @feature.total_scenarios += outline.scenarios.size
+              when :scenario
+                scenario(value)
+              else
+                log.warn "Undefined Key on feature : #{key}"
+            end
+          }
+        }
 
         @feature.tags.each do |feature_tag|
           tag_code_object = YARD::Registry.all(:tag).find {|tag| tag.name.to_s == feature_tag[:name].to_s }
@@ -149,6 +157,49 @@ module Cucumber
         }
       end
 
+
+      def rule(statement)
+        #log.debug "SCENARIO"
+        return if has_exclude_tags?(statement[:tags].map { |t| t[:name].gsub(/^@/, '') })
+
+        rule = YARD::CodeObjects::Cucumber::Rule.new(@feature,"rule_#{@feature.rules.length + 1}") do |s|
+          s.comments = statement[:comments] ? statement[:comments].map{|comment| comment.value}.join("\n") : ''
+          s.description = statement[:description] || ''
+          s.add_file(@file,statement[:location][:line])
+          s.keyword = statement[:keyword]
+          s.value = statement[:name]
+
+          statement[:tags].each {|rule_tag| find_or_create_tag(rule_tag[:name],s) }
+
+        end
+
+        rule.feature = @feature
+        @feature.rules << rule
+
+        if statement[:children]
+          statement[:children].each { |child|
+            child.each {|key, value|
+              case key
+                when :scenario
+                  scenario(value, rule)
+                else
+                  log.warn "Undefined Key on rules : #{key}"
+              end
+            }
+          }
+
+        end
+
+
+        # count Rule for Rule level tags
+        rule.tags.uniq.each { |rule_tag|
+          if !rule.feature.tags.include?(rule_tag)
+            tag_code_object = YARD::Registry.all(:tag).find {|tag| tag.name.to_s == rule_tag[:name].to_s }
+            tag_code_object.total_rules += 1
+          end
+        }
+      end
+
       #
       # Called when a scenario has been found
       #   - create a scenario
@@ -162,12 +213,12 @@ module Cucumber
       # @param [Scenario] statement is a scenario object returned from Gherkin
       # @see #find_or_create_tag
       #
-      def scenario(statement)
+      def scenario(statement, container = @feature)
         #log.debug "SCENARIO"
 
         return if has_exclude_tags?(statement[:tags].map { |t| t[:name].gsub(/^@/, '') })
 
-        scenario = YARD::CodeObjects::Cucumber::Scenario.new(@feature,"scenario_#{@feature.scenarios.length + 1}") do |s|
+        scenario = YARD::CodeObjects::Cucumber::Scenario.new(container,"scenario_#{@feature.scenarios.length + 1}") do |s|
           s.comments = statement[:comments] ? statement[:comments].map{|comment| comment.value}.join("\n") : ''
           s.description = statement[:description] || ''
           s.add_file(@file,statement[:location][:line])
@@ -179,6 +230,11 @@ module Cucumber
 
         scenario.feature = @feature
         @feature.scenarios << scenario
+
+        if @feature != container
+          container.scenarios << scenario
+        end
+
         @step_container = scenario
         statement[:steps].each { |s|
           step(s)
@@ -354,15 +410,15 @@ module Cucumber
 
         @table_owner.comments = step[:comments] ? step[:comments].map{|comment| comment.value}.join("\n") : ''
 
-        multiline_arg = step[:argument]
+        # multiline_arg = step[:argument]
 
-        case(multiline_arg[:type])
-        when :DocString
-          @table_owner.text = multiline_arg[:content]
-        when :DataTable
-          #log.info "Matrix: #{matrix(multiline_arg).collect{|row| row.collect{|cell| cell.class } }.flatten.join("\n")}"
-          @table_owner.table = matrix(multiline_arg[:rows])
-        end if multiline_arg
+        if step[:docString]
+          @table_owner.text = step[:docString][:content]
+        end
+
+        if step[:dataTable]
+          @table_owner.table = matrix(step[:dataTable][:rows])
+        end
 
         @table_owner.scenario = @step_container
         @step_container.steps << @table_owner

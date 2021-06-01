@@ -1,7 +1,7 @@
 module YARD::CodeObjects::Cucumber
   class Tag < NamespaceObject
 
-    attr_accessor :value, :owners, :total_scenarios
+    attr_accessor :value, :owners, :total_scenarios, :total_rules
 
     def features
       @owners.find_all { |owner| owner.is_a?(Feature) }
@@ -26,6 +26,10 @@ module YARD::CodeObjects::Cucumber
 
     def all_scenarios
       scenarios + indirect_scenarios
+    end
+
+    def rules
+      @owners.find_all { |owner| owner.is_a?(Rule) }
     end
   end
 end

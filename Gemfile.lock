@@ -4,7 +4,6 @@ PATH
     yard-gherkin-cucumber (0.0.1.dev)
       cucumber (>= 2.0, < 6.1)
       cucumber-gherkin (~> 19.0, >= 19.0.3)
-      cucumber-messages (~> 16.0, >= 16.0.1)
       webrick (>= 1.6.1, <= 1.7.0)
 
 GEM
@@ -46,7 +45,7 @@ PLATFORMS
 
 DEPENDENCIES
   cucumber (>= 2.0, < 6.1)
-  cucumber-gherkin (~> 19.0, >= 19.0.3)
+  gherkin (>= 4.0, < 6.0)
   rake (~> 13.0, >= 13.0.3)
   rdoc (>= 6.3.1, < 7.0)
   redcarpet

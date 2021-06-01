@@ -34,6 +34,7 @@ module YARD::Parser::Cucumber
     # @see Cucumber::Parser::CityBuilder
     def parse
       begin
+
         @parser.parse(@source)
         @feature = @builder.ast
         return nil if @feature.nil? # Nothing matched
