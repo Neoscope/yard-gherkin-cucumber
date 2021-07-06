@@ -67,7 +67,7 @@ Gem::Specification.new do |s|
   # Dependence a évaluer pour remplacer les 4 précédent
   # s.add_dependency 'cucumber-messages', '~> 16.0', '>= 16.0.1'
   s.add_dependency 'cucumber-gherkin', '~> 19.0', '>= 19.0.3'
-  s.add_dependency 'cucumber', '>= 2.0', '< 6.1'
+  # s.add_dependency 'cucumber', '>= 2.0', '< 6.1'
 
    # s.add_dependency 'yard', '~> 0.9', '>= 0.9.5'
 
